@@ -67,8 +67,9 @@ SETUP FOR LABELS
   height: unset;
   margin: unset;
   padding: unset;
-  background-image: unset;
-  font-size: unset;
+  border: unset;
+  background: unset;
+  font-size: 1em; /* change font size here */
   font-weight: initial;
   text-transform: capitalize;
   line-height: 1;
@@ -79,17 +80,19 @@ SETUP FOR LABELS
 .blurb ul.required-tags {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 0.3em;
-  margin-top: 0.35em;
+  column-gap: 0.3em; /* space between labels */
+  margin-top: 0.35em; /* space above label container */
+  margin-bottom: 0; /* space below label container */
 }
 
 /* setup for new labels */
 .blurb ul.required-tags > li > a > span.warnings,
 .blurb ul.required-tags > li > a > span:not(:is(.warning-yes, .warning-choosenotto))::before {
   display: block;
-  margin-block: 0.15em;
-  padding: 0.25em 0.35em;
-  border-radius: 0; /* put a value like 4px here to make the labels rounder */
+  margin-block: 0.15em; /* space above/below individual labels */
+  padding-block: 0.25em; /* top/bottom inner space */
+  padding-inline: 0.35em; /* left/right inner space */
+  border-radius: 0; /* replace the 0 with a value (like 4px or 0.25em) to get rounded borders */
 }
 
 /* hide old label text */
@@ -112,7 +115,7 @@ LABELS
 
 /* Creator chose not to warn - color */
 .required-tags .warning-choosenotto {
-  background: var(--ctnw);
+  background: var(--ctnw) !important;
 }
 
 /* Creator chose not to warn - blurb label text */
@@ -122,7 +125,7 @@ LABELS
 
 /* Warnings apply - color */
 .required-tags .warning-yes {
-  background: var(--warn);
+  background: var(--warn) !important;
 }
 
 /* Warnings apply - blurb label text */
@@ -132,13 +135,13 @@ LABELS
 
 /* No Archive warnings apply */
 .required-tags .warning-no {
-  background: var(--none);
+  background: var(--none) !important;
 }
 
 /* External work */
 .required-tags .external-work::before {
   content: "External Work";
-  background: var(--ext);
+  background: var(--ext) !important;
 }
 
 /*>========== Completion status ==========<*/
