@@ -1,0 +1,560 @@
+/*=============================================================
+                        
+                        AO3 Site Skin:
+          Replace the Content Icons With Text Labels
+
+                        by ZerafinaCSS
+
+=============================================================*/
+
+
+/*============================================================
+COLORS
+============================================================*/
+
+:root {
+
+  --text:    #FFFFFF;   /* text color for all labels */
+  --none:    #999999;   /* background color for empty labels, e. g. unknown status or no rating, category or warning*/
+
+/*>========== Ratig ==========<*/
+
+  --g:       #78A700;   /* General Audiences */
+  --t:       #E6B000;   /* Teen And Up Audiences */
+  --m:       #D76D12;   /* Mature */
+  --e:       #B0021F;   /* Explicit */
+
+/*>========== Relationships, pairings, orientations ==========<*/
+
+  --ff:      #B0021F;   /* Female/Female */
+  --fm:      #910679;   /* Female/Male */
+  --gen:     #78A700;   /* Gen = no (main) romantic/sexual relationships */
+  --mm:      #0054D4;   /* Male/Male */
+  --other:   #000000;   /* Other Relationships */
+
+/*>========== Content warnings ==========<*/
+
+  --ctnw:    #D76D12;   /* Creator Chose Not To Use Archive Warnings */
+  --warn:    #B0021F;   /* Archive Warnings Apply */
+  --ext:     #107CB9;   /* External Work */
+
+/*>========== Status (of work or promt) ==========<*/
+
+  --wip:     #B0021F;   /* Incomplete/Unfulfilled */
+  --fin:     #78A700;   /* Complete/Filled */
+  
+}
+
+/*============================================================
+SETUP FOR LABELS
+============================================================*/
+
+/* remove space on left side of blurb heading */
+.blurb .header:has(ul.required-tags) .heading {
+  margin-left: 0;
+}
+
+/* reset settings for the blurb icons and format the text */
+.blurb ul.required-tags,
+.blurb ul.required-tags li,
+.blurb ul.required-tags li a,
+.blurb ul.required-tags li span,
+.blurb ul.required-tags li + li + li,
+.blurb ul.required-tags li + li + li + li {
+  display: block;
+  position: unset;
+  width: unset;
+  height: unset;
+  margin: unset;
+  padding: unset;
+  background-image: unset;
+  font-size: unset;
+  font-weight: initial;
+  text-transform: capitalize;
+  line-height: 1;
+  color: var(--text);
+}
+
+/* container for the labels */
+.blurb ul.required-tags {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.3em;
+  margin-top: 0.35em;
+}
+
+/* setup for new labels */
+.blurb ul.required-tags > li > a > span.warnings,
+.blurb ul.required-tags > li > a > span:not(:is(.warning-yes, .warning-choosenotto))::before {
+  display: block;
+  margin-block: 0.15em;
+  padding: 0.25em 0.35em;
+  border-radius: 0; /* put a value like 4px here to make the labels rounder */
+}
+
+/* hide old label text */
+.blurb ul.required-tags > li > a > span:not(.warnings) > span.text {
+  display: none;
+}
+
+/* hide some of the old warning labels and label texts (except on promts and the external works) */
+/* no label for "No Archive Warnings Apply", because this warning is included in the tags */
+.index:not(.prompt) .blurb ul.required-tags > li:has(.warnings):not(:has(.warning-yes, .warning-choosenotto)),
+.index:not(.prompt) .blurb ul.required-tags > li > a > :is(.warning-yes, .warning-choosenotto) > span.text {
+  display: none;
+}
+
+/*============================================================
+LABELS
+============================================================*/
+
+/*>========== Content warnings ==========<*/
+
+/* Creator chose not to warn - color */
+.required-tags .warning-choosenotto {
+  background: var(--ctnw);
+}
+
+/* Creator chose not to warn - blurb label text */
+.index:not(.prompt) .required-tags .warning-choosenotto::before {
+  content: "CNTW";
+}
+
+/* Warnings apply - color */
+.required-tags .warning-yes {
+  background: var(--warn);
+}
+
+/* Warnings apply - blurb label text */
+.index:not(.prompt) .required-tags .warning-yes::before {
+   content: "Warnings";
+}
+
+/* No Archive warnings apply */
+.required-tags .warning-no {
+  background: var(--none);
+}
+
+/* External work */
+.required-tags .external-work::before {
+  content: "External Work";
+  background: var(--ext);
+}
+
+/*>========== Completion status ==========<*/
+
+/* Incomplete works */
+.required-tags .complete-no[Title*="in Progress" i]::before {
+  content: "WIP";
+  background: var(--wip);
+}
+
+/* Unfulfilled promts */
+.required-tags .complete-no[Title*="Unfulfilled" i]::before {
+  content: "Unfulfilled";
+  background: var(--wip);
+}
+
+/* Complete works */
+.required-tags .complete-yes[Title*="Complete" i]::before {
+  content: "Complete";
+  background: var(--fin);
+}
+
+/* Fulfilled promts */
+.required-tags .complete-yes[Title*="Filled" i]::before {
+  content: "Fulfilled";
+  background: var(--fin);
+}
+
+/*>========== One relationship/pairing/orientation category ==========<*/
+
+/* F/F */
+.required-tags .category-femslash::before {
+  content: "F/F";
+  background: var(--ff);
+}
+
+/* F/M */
+.required-tags .category-het::before {
+  content: "F/M";
+  background: var(--fm);
+}
+
+/* Gen */
+.required-tags .category-gen::before {
+  content: "Gen";
+  background: var(--gen);
+}
+
+/* M/M */
+.required-tags .category-slash::before {
+  content: "M/M";
+  background: var(--mm);
+}
+
+/* Multi */
+.required-tags .category-multi::before {
+  content: "Multi";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--mm), var(--gen));
+}
+
+/* Other relationships */
+.required-tags .category-other::before {
+  content: "Other";
+  background: var(--other);
+}
+
+/* Not put in any relationship category */
+.required-tags .category-none::before {
+  content: "No Category";
+  background: var(--none);
+}
+
+/*>========== Multiple relationship/pairing/orientation categories ==========<*/
+
+/* F/F, F/M */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i]::before {
+  content: "F/F, F/M";
+  background: linear-gradient(to right, var(--ff), var(--fm));
+}
+
+/* F/F, Gen */
+.required-tags .category[Title*="F/F" i][Title*="Gen" i]::before {
+  content: "F/F, Gen";
+  background: linear-gradient(to right, var(--ff), var(--gen));
+}
+
+/* F/F, M/M */
+.required-tags .category[Title*="F/F" i][Title*="M/M" i]::before {
+  content: "F/F, M/M";
+  background: linear-gradient(to right, var(--ff), var(--mm));
+}
+
+/* F/F, Other */
+.required-tags .category[Title*="F/F" i][Title*="Other" i]::before {
+  content: "F/F, Other";
+  background: linear-gradient(to right, var(--ff), var(--other));
+}
+
+/* F/M, Gen */
+.required-tags .category[Title*="F/M" i][Title*="Gen" i]::before {
+  content: "F/M, Gen";
+  background: linear-gradient(to right, var(--fm), var(--gen));
+}
+
+/* F/M, M/M */
+.required-tags .category[Title*="F/M" i][Title*="M/M" i]::before {
+  content: "F/M, M/M";
+  background: linear-gradient(to right, var(--fm), var(--mm));
+}
+
+/* F/M, Other */
+.required-tags .category[Title*="F/M" i][Title*="Other" i]::before {
+  content: "F/M, Other";
+  background: linear-gradient(to right, var(--fm), var(--other));
+}
+
+/* M/M, Gen */
+.required-tags .category[Title*="M/M" i][Title*="Gen" i]::before {
+  content: "M/M, Gen";
+  background: linear-gradient(to right, var(--mm), var(--gen));
+}
+
+/* Gen, Other */
+.required-tags .category[Title*="Gen" i][Title*="Other" i]::before {
+  content: "Gen, Other";
+  background: linear-gradient(to right, var(--gen), var(--other));
+}
+
+/* M/M, Other */
+.required-tags .category[Title*="M/M" i][Title*="Other" i]::before {
+  content: "M/M, Other";
+  background: linear-gradient(to right, var(--mm), var(--other));
+}
+
+/* F/F, F/M, Gen */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="Gen" i]::before {
+  content: "F/F, F/M, Gen";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--gen));
+}
+
+/* F/F, F/M, M/M */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="M/M" i]::before {
+  content: "F/F, F/M, M/M";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--mm));
+}
+
+/* F/F, F/M, Other */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="Other" i]::before {
+  content: "F/F, F/M, Other";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--other));
+}
+
+/* F/F, M/M, Gen */
+.required-tags .category[Title*="F/F" i][Title*="M/M" i][Title*="Gen" i]::before {
+  content: "F/F, M/M, Gen";
+  background: linear-gradient(to right, var(--ff), var(--mm), var(--gen));
+}
+
+/* F/F, Gen, Other */
+.required-tags .category[Title*="F/F" i][Title*="Gen" i][Title*="Other" i]::before {
+  content: "F/F, Gen, Other";
+  background: linear-gradient(to right, var(--ff), var(--gen), var(--other));
+}
+
+/* F/M, M/M, Gen */
+.required-tags .category[Title*="F/M" i][Title*="M/M" i][Title*="Gen" i]::before {
+  content: "F/M, M/M, Gen";
+  background: linear-gradient(to right, var(--fm), var(--mm), var(--gen));
+}
+
+/* F/M, Gen, Other */
+.required-tags .category[Title*="F/M" i][Title*="Gen" i][Title*="Other" i]::before {
+  content: "F/M, Gen, Other";
+  background: linear-gradient(to right, var(--fm), var(--gen), var(--other));
+}
+
+/* F/F, M/M, Other */
+.required-tags .category[Title*="F/F" i][Title*="M/M" i][Title*="Other" i]::before {
+  content: "F/F, M/M, Other";
+  background: linear-gradient(to right, var(--ff), var(--mm), var(--other));
+}
+
+/* F/M, M/M, Other */
+.required-tags .category[Title*="F/M" i][Title*="M/M" i][Title*="Other" i]::before {
+  content: "F/M, M/M, Other";
+  background: linear-gradient(to right, var(--fm), var(--mm), var(--other));
+}
+
+/* M/M, Gen, Other */
+.required-tags .category[Title*="Gen" i][Title*="M/M" i][Title*="Other" i]::before {
+  content: "M/M, Gen, Other";
+  background: linear-gradient(to right, var(--mm), var(--gen), var(--other));
+}
+
+/* F/F, F/M, M/M, Gen */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="Gen" i][Title*="M/M" i]::before {
+  content: "F/F, F/M, M/M, Gen";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--mm), var(--gen));
+}
+
+/* F/F, F/M, Gen, Other */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="Gen" i][Title*="Other" i]::before {
+  content: "F/F, F/M, Gen, Other";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--gen), var(--other));
+}
+
+/* F/F, F/M, M/M, Other */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="M/M" i][Title*="Other" i]::before {
+  content: "F/F, F/M, M/M, Other";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--mm), var(--other));
+}
+
+/* F/F, M/M, Gen, Other */
+.required-tags .category[Title*="F/F" i][Title*="M/M" i][Title*="Gen" i][Title*="Other" i]::before {
+  content: "F/F, M/M, Gen, Other";
+  background: linear-gradient(to right, var(--ff), var(--mm), var(--gen), var(--other));
+}
+
+/* F/M, M/M, Gen, Other */
+.required-tags .category[Title*="F/M" i][Title*="M/M" i][Title*="Gen" i][Title*="Other" i]::before {
+  content: "F/M, M/M, Gen, Other";
+  background: linear-gradient(to right, var(--fm), var(--mm), var(--gen), var(--other));
+}
+
+/* F/F, F/M, M/M, Gen, Other */
+.required-tags .category[Title*="F/F" i][Title*="F/M" i][Title*="Gen" i][Title*="M/M" i][Title*="Other" i]::before {
+  content: "F/F, F/M, M/M, Gen, Other";
+  background: linear-gradient(to right, var(--ff), var(--fm), var(--mm), var(--gen), var(--other));
+}
+
+/*>========== Rating ==========<*/
+
+/* General Audiences */
+.required-tags .rating-general-audience::before {
+  content: "Gen";
+  background: var(--g);
+}
+
+/* Teen And Up Audiences */
+.required-tags .rating-teen::before {
+  content: "Teen";
+  background: var(--t);
+}
+
+/* Mature */
+.required-tags .rating-mature::before {
+  content: "Mature";
+  background: var(--m);
+}
+
+/* Explicit */
+.required-tags .rating-explicit::before {
+  content: "Explicit";
+  background: var(--e);
+}
+
+/* Not rated */
+.required-tags .rating-notrated::before {
+  content: "Not Rated";
+  background: var(--none);
+}
+
+/*>========== Multiple ratings (for series) ==========<*/
+
+/* Gen, Teen */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i]::before {
+  content: "Gen, Teen";
+  background: linear-gradient(to right, var(--g), var(--t));
+}
+
+/* Gen, Mature */
+.required-tags .rating[Title*="Gen" i][Title*="Mature" i]::before {
+  content: "Gen, Mature";
+  background: linear-gradient(to right, var(--g), var(--m));
+}
+
+/* Gen, Explicit */
+.required-tags .rating[Title*="Gen" i][Title*="Explicit" i]::before {
+  content: "Gen, Explicit";
+  background: linear-gradient(to right, var(--g), var(--e));
+}
+
+/* Gen, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Not Rated" i]::before {
+  content: "Gen, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--none));
+}
+
+/* Teen, Mature */
+.required-tags .rating[Title*="Teen" i][Title*="Mature" i]::before {
+  content: "Teen, Mature";
+  background: linear-gradient(to right, var(--t), var(--m));
+}
+
+/* Teen, Explicit */
+.required-tags .rating[Title*="Teen" i][Title*="Explicit" i]::before {
+  content: "Teen, Explicit";
+  background: linear-gradient(to right, var(--t), var(--e));
+}
+
+/* Teen, Not Rated */
+.required-tags .rating[Title*="Teen" i][Title*="Not Rated" i]::before {
+  content: "Teen, Not Rated";
+  background: linear-gradient(to right, var(--t), var(--none));
+}
+
+/* Mature, Explicit */
+.required-tags .rating[Title*="Mature" i][Title*="Explicit" i]::before {
+  content: "Mature, Explicit";
+  background: linear-gradient(to right, var(--m), var(--e));
+}
+
+/* Mature, Not Rated */
+.required-tags .rating[Title*="Mature" i][Title*="Not Rated" i]::before {
+  content: "Mature, Not Rated";
+  background: linear-gradient(to right, var(--m), var(--none));
+}
+
+/* Explicit, Not Rated */
+.required-tags .rating[Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Explicit, Not Rated";
+  background: linear-gradient(to right, var(--e), var(--none));
+}
+
+/* Gen, Teen, Mature */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Mature" i]::before {
+  content: "Gen, Teen, Mature";
+  background: linear-gradient(to right, var(--g), var(--t), var(--m));
+}
+
+/* Gen, Teen, Explicit */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Explicit" i]::before {
+  content: "Gen, Teen, Explicit";
+  background: linear-gradient(to right, var(--g), var(--t), var(--e));
+}
+
+/* Gen, Teen, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Not Rated" i]::before {
+  content: "Gen, Teen, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--t), var(--none));
+}
+
+/* Gen, Mature, Explicit */
+.required-tags .rating[Title*="Gen" i][Title*="Mature" i][Title*="Explicit" i]::before {
+  content: "Gen, Mature, Explicit";
+  background: linear-gradient(to right, var(--g), var(--m), var(--e));
+}
+
+/* Gen, Mature, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Mature" i][Title*="Not Rated" i]::before {
+  content: "Gen, Mature, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--m), var(--none));
+}
+
+/* Teen, Mature, Explicit */
+.required-tags .rating[Title*="Teen" i][Title*="Mature" i][Title*="Explicit" i]::before {
+  content: "Teen, Mature, Explicit";
+  background: linear-gradient(to right, var(--t), var(--m), var(--e));
+}
+
+/* Teen, Mature, Not Rated */
+.required-tags .rating[Title*="Teen" i][Title*="Mature" i][Title*="Not Rated" i]::before {
+  content: "Teen, Mature, Not Rated";
+  background: linear-gradient(to right, var(--t), var(--m), var(--none));
+}
+
+/* Gen, Explicit, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Gen, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--e), var(--none));
+}
+
+/* Teen, Explicit, Not Rated */
+.required-tags .rating[Title*="Teen" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Teen, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--t), var(--e), var(--none));
+}
+
+/* Mature, Explicit, Not Rated */
+.required-tags .rating[Title*="Mature" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Mature, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--m), var(--e), var(--none));
+}
+
+/* Gen, Teen, Mature, Explicit */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Mature" i][Title*="Explicit" i]::before {
+  content: "Gen, Teen, Mature, Explicit";
+  background: linear-gradient(to right, var(--g), var(--t), var(--m), var(--e));
+}
+
+/* Gen, Teen, Mature, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Mature" i][Title*="Not Rated" i]::before {
+  content: "Gen, Teen, Mature, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--t), var(--m), var(--none));
+}
+
+/* Gen, Teen, Explicit, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Gen, Teen, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--t), var(--e), var(--none));
+}
+
+/* Gen, Mature, Explicit, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Mature" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Gen, Mature, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--m), var(--e), var(--none));
+}
+
+/* Teen, Mature, Explicit, Not Rated */
+.required-tags .rating[Title*="Teen" i][Title*="Mature" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Teen, Mature, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--t), var(--m), var(--e), var(--none));
+}
+
+/* Gen, Teen, Mature, Explicit, Not Rated */
+.required-tags .rating[Title*="Gen" i][Title*="Teen" i][Title*="Mature" i][Title*="Explicit" i][Title*="Not Rated" i]::before {
+  content: "Gen, Teen, Mature, Explicit, Not Rated";
+  background: linear-gradient(to right, var(--g), var(--t), var(--m), var(--e), var(--none));
+}
