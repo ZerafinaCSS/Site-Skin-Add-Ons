@@ -7,6 +7,10 @@
 
 =============================================================*/
 
+.skin-credit {
+  content: "Replace the Content Icons With Text Labels by ZerafinaCSS
+  https://archiveofourown.org/works/76032096/chapters/198940896";
+}
 
 /*============================================================
 COLORS
@@ -15,7 +19,7 @@ COLORS
 :root {
 
   --text:    #FFFFFF;   /* text color for all labels */
-  --none:    #999999;   /* background color for empty labels, e. g. unknown status or no rating, category or warning*/
+  --none:    #999999;   /* background color for empty labels, e. g. unknown status or no rating, category or warning */
 
 /*>========== Ratig ==========<*/
 
@@ -100,8 +104,8 @@ SETUP FOR LABELS
   display: none;
 }
 
-/* hide some of the old warning labels and label texts (except on promts and the external works) */
-/* no label for "No Archive Warnings Apply", because this warning is included in the tags */
+/* hide some of the old warning labels and label texts (except on promts and external works) */
+/* no label for "No Archive Warnings Apply", because it is already included in the tags */
 .index:not(.prompt) .blurb ul.required-tags > li:has(.warnings):not(:has(.warning-yes, .warning-choosenotto)),
 .index:not(.prompt) .blurb ul.required-tags > li > a > :is(.warning-yes, .warning-choosenotto) > span.text {
   display: none;
