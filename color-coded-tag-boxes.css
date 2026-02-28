@@ -7,6 +7,10 @@
 
 =============================================================*/
 
+.skin-credit {
+  content: "Color-Coded Tag Boxes by ZerafinaCSS
+  https://archiveofourown.org/works/76032096/chapters/199463046";
+}
 
 /*>========== reset some of the default tag styling ==========<*/
 
@@ -67,6 +71,13 @@ div:has(.commas) [class^="warning"] a.tag,
 
 /* relationships */
 div:has(.commas) [class^="relationship"] a.tag {
+  border-color: #994D00;
+  background-color: #FFD9B2;
+  color: #111; /* text color */
+}
+
+/* relationships with "&" separator => nonsexual, non-romantic */
+div:has(.commas) [class^="relationship"] a.tag[href*="%20*a*%20"] {
   border-color: #994D00;
   background-color: #FFD9B2;
   color: #111; /* text color */
