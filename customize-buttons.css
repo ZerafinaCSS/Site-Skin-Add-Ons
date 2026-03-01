@@ -1,0 +1,125 @@
+/*============================================================
+
+                        AO3 Site Skin:
+                     Customize the Buttons
+
+                        by ZerafinaCSS
+
+=============================================================*/
+
+.skin-credit {
+  content: "Customize the Buttons by ZerafinaCSS 
+  https://archiveofourown.org/works/76032096/chapters/211330756";
+}
+
+/*>========== buttons ==========<*/
+
+.action,
+.action:is(:link, :visited),
+.action a,
+.action a:visited,
+.actions a,
+.actions a:is(:link, :visited),
+.actions:not(#dashboard .actions) .current,
+.actions button,
+.actions input:not([type=text]),
+.actions label,
+label.action,
+label.action:is(:hover, :focus),
+input[type=submit],
+input[type=button],
+input::file-selector-button,
+button {
+  border-width: 1px;
+  border-style: solid; /* demo for different styles: https://www.w3schools.com/cssref/playdemo.php?filename=playcss_border-style */
+  border-color: #2A2A2A;
+  border-radius: 0.25em; /* roundness of corners */
+  box-shadow: none;
+  background-color: #900000;
+  background-image: none; /* insert image url or code for gradient here */
+  background-origin: border-box !important; /* make background images/gradients start from the corner of the border, NOT the corner of the padding edge */
+  color: #FFFFFF; /* text color */
+  cursor: pointer;
+}
+
+/*>========== button subtypes and modes ==========<*/
+
+/*>>====== hovered + focused buttons =====<<*/
+
+/* hover = when you move the mouse over the button */
+/* focus = when you click or tap on the button or select it with the tab key */
+
+.action:is(:hover, :focus),
+.action a:is(:hover, :focus),
+.actions a:is(:hover, :focus),
+.actions button:is(:hover, :focus),
+.actions input:not([type=text]):is(:hover, :focus),
+input[type=submit]:is(:hover, :focus),
+input[type=button]:is(:hover, :focus),
+input::file-selector-button:is(:hover, :focus),
+button:is(:hover, :focus) {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #900000;
+  box-shadow: none;
+  background-color: #EEEEEE;
+  background-image: none; /* insert image url or code for gradient here */
+  color: #900000; /* text color */
+}
+
+/*>>====== currently active/selected buttons =====<<*/
+
+/* example: the page you're currently on when browsing works */
+
+.actions a:active,
+.actions:not(#dashboard .actions) .current,
+a.current,
+a.current:is(:hover, :focus),
+a:link.current {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #AAAAAA;
+  box-shadow: none;
+  background-color: #C4C4C4;
+  background-image: none; /* insert image url or code for gradient here */
+  color: #2A2A2A; /* text color */
+  cursor: default;
+}
+
+/* disabled buttons */
+.actions label.disabled,
+#tos_prompt [disabled] {
+  border-width: 1px;
+  border-style: dashed;
+  border-color: #BBBBBB;
+  box-shadow: none;
+  background-color: #D3D3D3;
+  background-image: none; /* insert image url or code for gradient here */
+  color: #5A5A5A; /* text color */
+  cursor: not-allowed;
+}
+
+/* select element on disabled buttons */
+/* inherits styling from above element */
+.actions .disabled select,
+.actions .disabled select:hover {
+  background: none;
+  color: inherit; /* text color */
+}
+
+/*>========== buttons with "to top" arrows and "expand"/"contract" symbols ==========<*/
+
+/* these get kind of broken and the following code is to repair them again */
+/* in most cases, no changes are required here */
+
+.listbox > .heading .action:has(a) {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.listbox > .heading .action a {
+  padding-inline: 0.3em;
+  color: inherit;
+}
