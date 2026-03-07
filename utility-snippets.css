@@ -1,0 +1,266 @@
+/*============================================================
+
+                AO3 SITE SKIN UTILITY ADD-ONS
+
+============================================================*/
+
+
+/*============================================================
+Hide Specific Buttons
+============================================================*/
+
+/* hide "Delete" buttons on comments */
+.thread li[id^="delete_comment_link"] {
+  display: none;
+}
+
+/* hide "Block" buttons on comments */
+.thread li[id^="block_link"] {
+  display: none;
+}
+
+/* hide "Delete from History" button in "Is it later already?" module on AO3 homepage*/
+.splash .reading .actions {
+  display: none;
+}
+
+/* hide "Delete" button in "Unread messages" module on AO3 homepage */
+.splash .comment .actions li:has(input[value="Delete"]) {
+  display: none;
+}
+
+/* hide "Clear History" button */
+li:has(a[href$="/readings/clear"]) {
+  display: none;
+}
+
+/* hide "Delete from History" button on "History" pages */
+.readings-index ul.actions:has(input[value="Delete from History"]) {
+  display: none;
+}
+
+/* hide "RSS Feed" button */
+li:has(a.rss) {
+  display: none;
+}
+
+/* hide "Delete My Account" button */
+li:has(a[data-confirm][data-method="delete"][href*="/users/"]) {
+  display: none;
+}
+
+/* hide "Orphan Work" button */
+li:has(a[href*="/orphans/new?work"]) {
+  display: none;
+}
+
+/* hide "Delete Work" button */
+li:has(a[href*="/works"][data-method="delete"]) {
+  display: none;
+}
+
+/* hide "Orphan Series" button */
+li:has(a[href*="/orphans/new?series"]) {
+  display: none;
+}
+
+/* hide "Delete Series" button */
+li:has(a[href*="/series"][data-method="delete"]) {
+  display: none;
+}
+
+/* hide "Delete All Subscriptions" button */
+li:has(a[href*="/subscriptions/confirm_delete_all"]) {
+  display: none;
+}
+
+/*============================================================
+Hide/Replace AO3 Header Elements
+============================================================*/
+
+/* hide the AO3 logo */
+#header .logo {
+  display: none;
+}
+
+/* hide user icon in the header */
+#greeting p.icon {
+  display: none;
+}
+
+/* hide the "Log Out" button */
+/* because why would you ever want to leave AO3? */
+#header #greeting a[href*="/users/logout"] {
+  display: none;
+}
+
+/*========== replace "Archive of Our Own beta" heading ==========*/
+
+  /* hide "Archive of Our Own beta" */
+  #header .heading a span,
+  #header .heading a sup {
+    display: none;
+  }
+
+  /* replacement */
+  #header .heading a:before {
+    content: "Insert replacement here"
+  }
+
+/*========== replace "Hi, [username]! ==========*/
+
+  /* hide "Hi, [username]! */
+  /* but in a way that keeps the functionality for the replacement */
+  #header #greeting .dropdown > a[href*="/users/"] {
+    width: 1.4em;
+    overflow: hidden;
+    color: transparent;
+  }
+
+  /* replacement */
+  #header #greeting .dropdown > a[href*="/users/"]::before {
+    display: block;
+    color: initial;
+    content: "🌠"; /* put any text/emoji/symbol you want between the quotation marks; adjust width above if necessary */
+  }
+
+/*============================================================
+Hide Statistics
+============================================================*/
+
+/* hide stats for comments, kudos, bookmarks and hits on all works */
+.stats :is(.comments, .kudos, .bookmarks, .hits) {
+  display: none;
+}
+
+/* hide stats for comments, kudos, bookmarks and hits only on your own work */
+.own.blurb .stats :is(.comments, .kudos, .bookmarks, .hits),
+.series-show:has(.own.blurb) .series.meta .bookmarks {
+  display: none;
+}
+
+/* hide the link to your statistics page */
+li:has(> a[href*="/stats"]) {
+  display: none !important;
+}
+
+/* hide the content of your statistics page */
+.stats-index {
+  display: none;
+}
+
+/*============================================================
+Hide Miscellaneous Elements
+============================================================*/
+
+/* hide the "You have muted some users" notice */
+p.muted.notice {
+  display: none;
+}
+
+/* hide list of users who have left kudos on works */
+#feedback #kudos {
+  display: none;
+}
+
+/* hide list of users who have left kudos on works, except on your works */
+#main:not(:has(.actions > .edit a[href$="/edit"])) #feedback #kudos {
+  display: none;
+}
+
+/* hide list of users who have left kudos on your own works, but show them on other works */
+#main:has(.actions > .edit a[href$="/edit"]) #feedback #kudos {
+  display: none;
+}
+
+/* hide "characters" tags in blurbs */
+.tags li.characters {
+  display: none;
+}
+
+/* hide specific skins in footer */
+/* delete the line of code for the ones you want to keep */
+#footer .menu li:has([action="/skins/unset"]), /* Default */
+#footer .menu li:has([action="/skins/891/set"]), /* Low Vision Default */
+#footer .menu li:has([action="/skins/929/set"]), /* Reversi */
+#footer .menu li:has([action="/skins/932/set"]) /* Snow Blue */
+ {
+  display: none;
+}
+
+/*============================================================
+Display Download Button for Only One Format
+============================================================*/
+
+/* replace the "epub" below with "azw3", "mobi", "pdf" or "html" to get the button for another format */
+
+/* remove expandable menu */
+.javascript .work.navigation .download .secondary {
+  display: inline;
+  position: unset;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+/* fix positioning */
+.javascript .work.navigation .secondary a {
+  display: inline-block;
+}
+
+/* remove all the download buttons except for the EPUB one */ 
+.download > button,
+.javascript .work.navigation .secondary li:has(a:not([href*="epub"])) {
+  display: none;
+}
+
+/* add a "download" symbol */
+.download .expandable.secondary a::before {
+  content: "\2913\00FE0F\00a0";
+}
+
+/*============================================================
+Position Blurb Icons in a Row Under the Work Title and the Fandom Tags
+============================================================*/
+
+/* remove the space for the icons on the right side */
+.blurb:has(ul.required-tags) .header .heading {
+  margin-left: 0;
+}
+
+/* the following part changes the position of the content icons */
+
+.blurb .header ul.required-tags {
+  position: unset;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4px;
+  width: auto;
+  margin-block: 0.375em;
+}
+
+.blurb .header ul.required-tags li {
+  position: unset;
+}
+
+/*============================================================
+Miscellaneous
+============================================================*/
+
+/* add a heart to tags for romantic/sexual relationships (= e.g. tags that contain a slash) */
+[class^="relationship"] a.tag[href*="*s*"]::before {
+  content: "\002764\fe0e \00a0"; /* = unicode heart + variation selector + non-breaking space */
+}
+
+/* work blurbs: display title, creator and gifteee in different lines */
+.blurb .header h4.heading a:first-of-type::after,
+.blurb .header h4.heading a[rel="author"]:has(+ a[href$="/gifts"])::after {
+  content: "\A";
+  white-space: pre;
+}
+
+/* black out gif icons */
+img.icon[src$=".gif"] {
+  filter: brightness(0) saturate(100%);
+}
